@@ -28,3 +28,5 @@ WHERE faculty_id = 11;
 DELETE FROM Faculty
 WHERE faculty_id = 4;
 
+SELECT * FROM Faculty
+WHERE department = 'Computer Science';
