@@ -20,3 +20,8 @@ INSERT INTO Faculty (faculty_id, name, email, department) VALUES
 (9, 'Mohamed Mustafa', 'mohamed.mustafa@school.edu', 'Software Engineering'),
 (10, 'Omer Ali', 'omer.ali@school.edu', 'Mathematics'),
 (11, 'Ilunga Mwamba', 'ilunga.mwamba@school.edu', 'Data Science');
+
+UPDATE Faculty
+SET department = 'Software Engineering'
+WHERE faculty_id = 11;
+
