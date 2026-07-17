@@ -1,1 +1,2 @@
-
+CREATE DATABASE IF NOT EXISTS alu_db;
+USE alu_db;
