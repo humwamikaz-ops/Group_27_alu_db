@@ -25,3 +25,6 @@ UPDATE Faculty
 SET department = 'Software Engineering'
 WHERE faculty_id = 11;
 
+DELETE FROM Faculty
+WHERE faculty_id = 4;
+
