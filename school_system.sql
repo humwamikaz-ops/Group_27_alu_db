@@ -71,3 +71,17 @@ WHERE classroom_id = 5;
 -- Fixed: Changed building_name to building to match the schema above
 SELECT * FROM Classroom
 WHERE building = 'Innovation Hall';
+CREATE TABLE IF NOT EXISTS Courses (
+    course_id INT AUTO_INCREMENT PRIMARY KEY,
+    course_code VARCHAR(10) NOT NULL UNIQUE,
+    course_name VARCHAR(100) NOT NULL,
+    credits INT NOT NULL DEFAULT 3,
+    faculty_id INT,
+    classroom_id INT,
+    FOREIGN KEY (faculty_id) REFERENCES Faculty(faculty_id) ON DELETE SET NULL,
+    FOREIGN KEY (classroom_id) REFERENCES Classroom(classroom_id) ON DELETE SET NULL
+);
+
+INSERT INTO Courses (course_code, course_name, credits, faculty_id, classroom_id) VALUES 
+('CS101', 'Introduction to Computer Science', 4, 1, 1),
+('DB302', 'Relational Database Design', 3, 2, 2);`
