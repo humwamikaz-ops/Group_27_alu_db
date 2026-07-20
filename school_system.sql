@@ -71,3 +71,47 @@ WHERE classroom_id = 5;
 -- Fixed: Changed building_name to building to match the schema above
 SELECT * FROM Classroom
 WHERE building = 'Innovation Hall';
+-- ============================================================
+-- Member E: Extra-Curricular Activities & Junction Mappings
+-- ============================================================
+
+-- 1. Student Courses Mapping (Junction: Students <-> Courses)
+CREATE TABLE IF NOT EXISTS Student_Courses (
+    student_id INT,
+    course_id INT,
+    enrollment_semester VARCHAR(20) DEFAULT 'Fall 2026',
+    grade VARCHAR(2),
+    PRIMARY KEY (student_id, course_id),
+    FOREIGN KEY (student_id) REFERENCES Students(student_id) ON DELETE CASCADE,
+    FOREIGN KEY (course_id) REFERENCES Courses(course_id) ON DELETE CASCADE
+);
+
+-- 2. Extra Curricular Activities Base Entity
+CREATE TABLE IF NOT EXISTS Extra_Curricular_Activities (
+    activity_id INT AUTO_INCREMENT PRIMARY KEY,
+    activity_name VARCHAR(100) NOT NULL,
+    budget DECIMAL(10,2)
+);
+
+-- 3. Student Activities Mapping (Junction: Students <-> Activities)
+CREATE TABLE IF NOT EXISTS Student_Activities (
+    student_id INT,
+    activity_id INT,
+    join_date DATE,
+    PRIMARY KEY (student_id, activity_id),
+    FOREIGN KEY (student_id) REFERENCES Students(student_id) ON DELETE CASCADE,
+    FOREIGN KEY (activity_id) REFERENCES Extra_Curricular_Activities(activity_id) ON DELETE CASCADE
+);
+
+-- Member E: Baseline Seed Data
+INSERT INTO Extra_Curricular_Activities (activity_name, budget) VALUES 
+('Tech Club', 500.00),
+('Debate Team', 300.00);
+
+INSERT INTO Student_Courses (student_id, course_id, grade) VALUES 
+(1, 1, 'A'),
+(2, 2, 'B');
+
+INSERT INTO Student_Activities (student_id, activity_id, join_date) VALUES 
+(1, 1, '2026-02-01'),
+(2, 2, '2026-02-15');
