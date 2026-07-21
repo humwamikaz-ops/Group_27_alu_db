@@ -103,3 +103,41 @@ DELETE FROM Classroom WHERE classroom_id = 5;
 
 SELECT * FROM Students WHERE enrollment_date >= '2026-01-16';
 SELECT * FROM Classroom WHERE building = 'Innovation Hall';
+
+SELECT * FROM Faculty WHERE department = 'Computer Science';
+UPDATE Faculty SET department = 'Software Engineering' WHERE faculty_id = 1;
+DELETE FROM Faculty WHERE faculty_id = 2;
+
+SELECT * FROM Extra_Curricular_Activities WHERE budget > 400.00;
+UPDATE Extra_Curricular_Activities SET budget = 600.00 WHERE activity_id = 1;
+DELETE FROM Extra_Curricular_Activities WHERE activity_id = 2;
+
+SELECT * FROM Courses WHERE credits >= 3;
+UPDATE Courses SET credits = 4 WHERE course_id = 1;
+DELETE FROM Courses WHERE course_id = 2;
+
+SELECT 
+    s.name AS student_name, 
+    c.course_code, 
+    c.course_name, 
+    sc.grade
+FROM Students s
+JOIN Student_Courses sc ON s.student_id = sc.student_id
+JOIN Courses c ON sc.course_id = c.course_id;
+
+SELECT 
+    s.name AS student_name, 
+    a.activity_name, 
+    sa.join_date
+FROM Students s
+JOIN Student_Activities sa ON s.student_id = sa.student_id
+JOIN Extra_Curricular_Activities a ON sa.activity_id = a.activity_id;
+
+SELECT 
+    c.course_name, 
+    COUNT(sc.student_id) AS total_enrolled
+FROM Courses c
+LEFT JOIN Student_Courses sc ON c.course_id = sc.course_id
+GROUP BY c.course_id, c.course_name;
+
+SELECT AVG(capacity) AS average_capacity FROM Classroom;
